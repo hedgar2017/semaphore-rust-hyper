@@ -9,3 +9,4 @@ description = "A Semaphore demo CI pipeline using Rust and Hyper"
 [dependencies]
 clap = "2.32"
 hyper = "0.12"
+futures = "0.1"
