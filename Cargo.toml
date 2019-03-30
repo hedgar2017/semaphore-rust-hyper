@@ -3,5 +3,9 @@ name = "semaphore-rust-hyper"
 version = "0.1.0"
 authors = ["hedgar2017 <hedgar2017@gmail.com>"]
 edition = "2018"
+license = "MIT"
+description = "A Semaphore demo CI pipeline using Rust and Hyper"
 
 [dependencies]
+clap = "2.32"
+hyper = "0.12"
