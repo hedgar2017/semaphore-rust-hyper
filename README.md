@@ -9,10 +9,10 @@ The program is a simple hello-world HTTP server implemented with the Hyper async
 This sequence describes a setup on a newly installed Linux system. If some of the tools have already been installed, you may just skip those steps.
 
 1. Install Rust with `curl https://sh.rustup.rs -sSf | sh`
-2. Clone the project with `git clone ...`
+2. Clone the project with `git clone ${REPOSITORY}`
 3. Run the project with `cargo run --verbose --release -- --port 8080`
 
-The release build of the Hyper HTTP server is now running in your terminal on port 8080
+The release build of the Hyper HTTP server is now running in your terminal on port 8080.
 
 ## CI on Semaphore
 
