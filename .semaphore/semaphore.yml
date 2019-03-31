@@ -60,6 +60,5 @@ blocks:
           - cargo test --verbose --all
 
           # Store the main build and the ~/.cargo directory.
-          - export LOCK_CHECKSUM=$(checksum Cargo.lock)
           - ( cd ${HOME} && cache store cargo-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} .cargo )
           - cache store target-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} target
