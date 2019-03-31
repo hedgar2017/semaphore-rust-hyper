@@ -39,7 +39,7 @@ blocks:
           - cache restore clippy-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM}
 
           # Check the source code with the formatter.
-          - cargo fmt --verbose --all
+          - cargo fmt --verbose --all -- --check
 
           # Check the source code with the linter.
           - cargo clippy
@@ -56,10 +56,7 @@ blocks:
           - ( cd ${HOME} && cache restore cargo-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} )
           - cache restore target-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM}
 
-          # Build the project.
-          - cargo build --verbose
-
-          # Run tests.
+          # Build the project and run the tests.
           - cargo test --verbose --all
 
           # Store the main build and the ~/.cargo directory.
