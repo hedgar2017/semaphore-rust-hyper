@@ -37,8 +37,8 @@ blocks:
           - checkout
           - export LOCK_CHECKSUM=$(checksum Cargo.lock)
 
-          # Restore the ~/.cargo linter build. The build differs from the ordinar one and is stored separately.
-          - ( cd ${HOME} && cache restore cargo-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} )
+          # Restore the /usr/local/cargo linter build. The build differs from the ordinar one and is stored separately.
+          - ( cd /usr/local && cache restore cargo-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} )
           - cache restore clippy-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM}
 
           # Check the source code with the formatter.
@@ -56,12 +56,12 @@ blocks:
           - export LOCK_CHECKSUM=$(checksum Cargo.lock)
 
           # Restore the main build.
-          - ( cd ${HOME} && cache restore cargo-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} )
+          - ( cd /usr/local && cache restore cargo-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} )
           - cache restore target-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM}
 
           # Build the project and run the tests.
           - cargo test --verbose --all
 
-          # Store the main build and the ~/.cargo directory.
-          - ( cd ${HOME} && cache store cargo-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} .cargo )
+          # Store the main build and the /usr/local/cargo directory.
+          - ( cd /usr/local && cache store cargo-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} cargo )
           - cache store target-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} target
