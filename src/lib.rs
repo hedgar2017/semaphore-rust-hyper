@@ -19,15 +19,13 @@ pub fn run(port: u16) {
     hyper::rt::run(server);
 }
 
-type HelloFuture = Box<Future<Item = Response<Body>, Error = hyper::Error> + Send>;
-
 ///
 /// The HTTP request handler which returns hello-world responses.
 ///
-fn hello(_request: Request<Body>) -> HelloFuture {
+fn hello(_request: Request<Body>) -> impl Future<Item = Response<Body>, Error = hyper::Error> {
     let mut response = Response::new(Body::empty());
     *response.body_mut() = Body::from("Hello, World!");
-    Box::new(future::ok(response))
+    future::ok(response)
 }
 
 #[cfg(test)]

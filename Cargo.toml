@@ -1,12 +1,12 @@
 [package]
 name = "semaphore-rust-hyper"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["hedgar2017 <hedgar2017@gmail.com>"]
 edition = "2018"
 license = "MIT"
 description = "A Semaphore demo CI pipeline using Rust and Hyper"
 
 [dependencies]
-clap = "2.32"
-hyper = "0.12"
-futures = "0.1"
+clap = "2.33.0"
+futures = "0.1.26"
+hyper = "0.12.28"
