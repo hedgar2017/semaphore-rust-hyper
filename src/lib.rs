@@ -22,7 +22,7 @@ pub fn run(port: u16) {
 type HelloFuture = Box<Future<Item = Response<Body>, Error = hyper::Error> + Send>;
 
 ///
-/// The HTTP request processor which returns hello-world responses.
+/// The HTTP request handler which returns hello-world responses.
 ///
 fn hello(_request: Request<Body>) -> HelloFuture {
     let mut response = Response::new(Body::empty());
