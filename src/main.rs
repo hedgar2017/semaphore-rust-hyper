@@ -7,7 +7,7 @@ pub enum Error {}
 
 ///
 /// The main function gets the HTTP port from the command line arguments
-/// and starts the Hyper HTTP server using the library method.
+/// and starts the Hyper HTTP server.
 ///
 fn main() -> Result<(), Error> {
     let args = clap::App::new(env!("CARGO_PKG_NAME"))
