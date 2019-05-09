@@ -1,5 +1,5 @@
 //!
-//! The CI pipeline demo binary.
+//! The Semaphone CI pipeline demo binary.
 //!
 
 #[derive(Debug)]

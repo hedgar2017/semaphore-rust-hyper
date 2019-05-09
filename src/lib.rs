@@ -1,5 +1,5 @@
 //!
-//! The CI pipeline demo library.
+//! The Semaphone CI pipeline demo library.
 //!
 
 use futures::{future, prelude::*};
