@@ -28,7 +28,7 @@ The workflow executes the following actions:
 4. Builds and tests the project
    1. Gets the default build from the cache
    2. Builds the project and runs the tests
-   3. Puts the main build and ~/.cargo to the cache
+   3. Puts the default build and ~/.cargo to the cache
 
 Sequences **3** and **4** are executed in parallel.
 
