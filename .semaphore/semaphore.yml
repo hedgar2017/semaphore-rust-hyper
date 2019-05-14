@@ -28,17 +28,19 @@ blocks:
     task:
       prologue:
         commands:
-          # Install the Rust formatter and linter.
-          - rustup component add rustfmt clippy
-      jobs:
-      - name: Formatter and linter
-        commands:
-          # Download code from Git repository. This step is mandatory if the job is to work with your code.
+          # Download the source code from the Git repository.
           - checkout
           - export LOCK_CHECKSUM=$(checksum Cargo.lock)
 
-          # Restore the /usr/local/cargo linter build. The build differs from the ordinar one and is stored separately.
+          # Get the cargo package index from the cache.
           - ( cd /usr/local && cache restore cargo-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} )
+      jobs:
+      - name: Formatter and linter
+        commands:
+          # Install the Rust formatter and linter.
+          - rustup component add rustfmt clippy
+
+          # Get the linter build from the cache. The build differs from the ordinar one and is stored separately.
           - cache restore clippy-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM}
 
           # Check the source code with the formatter.
@@ -47,21 +49,16 @@ blocks:
           # Check the source code with the linter.
           - cargo clippy
 
-          # Store the linter build.
+          # Put the linter build to the cache.
           - cache store clippy-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} target
       - name: Build and tests
         commands:
-          # Each job on Semaphore starts from a clean environment, so we repeat the required project setup.
-          - checkout
-          - export LOCK_CHECKSUM=$(checksum Cargo.lock)
-
-          # Restore the main build.
-          - ( cd /usr/local && cache restore cargo-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} )
+          # Get the default build from the cache.
           - cache restore target-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM}
 
           # Build the project and run the tests.
           - cargo test --verbose --all
 
-          # Store the main build and the /usr/local/cargo directory.
+          # Put the main build and the /usr/local/cargo directory to the cache.
           - ( cd /usr/local && cache store cargo-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} cargo )
           - cache store target-${SEMAPHORE_GIT_BRANCH}-${LOCK_CHECKSUM} target
